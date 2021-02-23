@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Comunidade Impressionadora - Projeto site completo usando FLask</h1>
+        <h2>Aplicando conhecimento em projetos reais</h2>
+    </div>
+    <hr>
+    <div class="container">
+        {% for post in posts %}
+        <div class="row mt-2 p-3 border meupost">
+            <div class="col col-2">
+                <div class="image pe-2"> <img src="{{ url_for('static', filename='img/{}'.format(post.autor.fotoPerfil)) }}" class="rounded" width="200"> </div>
+                <strong>{{post.autor.nome}}</strong>
+                
+                <div class="row d-flex justify-content-center">            
+                    <strong>Cursos</strong>
+                    {% for curso in post.autor.cursos.split(';') %}    
+                        {% if 'Não informado' == curso %}
+                        <div></div>
+                        {% else %}
+                        <button class="btn btn-info mt-2" disabled>{{ curso }}</button>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col col-9">
+                <a class="nav-link" href="{{ url_for('exibirPost', idPost=post.id) }}">
+                    <h3 class="display-6">{{ post.titulo }}</h3>
+                </a>    
+                
+                <div>
+                    <p class="text-info">{{ post.corpo }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

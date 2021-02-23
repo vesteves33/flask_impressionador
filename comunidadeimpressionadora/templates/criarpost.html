@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form action="" method="post" class="border p-4 mt-2">
+                    {{ criarPost.csrf_token}}
+                    <Legend>Crie seu post</Legend>
+
+                    <fieldset>
+                        <div class="form-group">
+                            {{ criarPost.titulo.label(class='form-control-label mb-1') }}
+
+                            {% if criarPost.titulo.errors %}
+                                {{ criarPost.titulo(class='form-control is-invalid')}}
+                            <div class="invalid-feedback">
+                                {% for erro in criarPost.titulo.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ criarPost.titulo(class='form-control') }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ criarPost.post.label(class='form-control-label mb-1') }}
+
+                            {% if criarPost.post.errors %}
+                                {{ criarPost.post(class='form-control is-invalid') }}
+                                <div class="invalid-feedback">
+                                    {% for erro in criarPost.post.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ criarPost.post(class='form-control') }}
+                            {% endif %}
+                        </div>
+                    </fieldset>
+
+                    {{ criarPost.botaoPostar(class='btn btn-primary mt-2') }}
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
